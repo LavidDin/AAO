@@ -193,7 +193,6 @@ def proc_suffix(sentence, hash)
 
     sentence.split(' ').each do |word|
         new_word = word
-        p new_word
         hash.each do |k, v|
             new_word += v if k.call(word)
         end
