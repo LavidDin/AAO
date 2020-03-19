@@ -14,5 +14,4 @@ class Passenger
         @flight_numbers << flight_number.upcase if !has_flight?(flight_number)
 
     end
-
 end

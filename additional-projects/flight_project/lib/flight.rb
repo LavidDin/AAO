@@ -28,5 +28,4 @@ class Flight
     def << (passenger)
         board_passenger(passenger)
     end
-
 end
