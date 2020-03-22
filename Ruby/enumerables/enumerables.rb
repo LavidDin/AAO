@@ -7,11 +7,13 @@ class Array
     end
 
     def my_select(&prc)
-        selected = []
-        self.my_each do |i|
-            selected << i if prc.call(self[i])
+        selects = []
+
+        self.my_each do |item|
+        selects << item if prc.call(item)
         end
-        selected
+
+        selects
     end
 
     def my_reject(&prc)
