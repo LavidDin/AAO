@@ -1,11 +1,11 @@
 class Bootcamp
   def initialize(name, slogan, student_capacity)
-    @name= name
-    @slogan= slogan
-    @student_capacity= student_capacity
-    @teachers= []
-    @students= []
-    @grades = Hash.new { |h, k| h[k] = [] }
+    @name = name
+    @slogan = slogan
+    @student_capacity = student_capacity
+    @teachers = []
+    @students = []
+    @grades = Hash.new { |h,k| h[k] = [] }
   end
 
   def name
@@ -24,10 +24,10 @@ class Bootcamp
     @students
   end
 
-  def hire(new_teacher)
-    @teachers << new_teacher
+  def hire(teacher)
+    @teachers << teacher
   end
-  
+
   def enroll(new_student)
     if @students.length < @student_capacity
         @students << new_student
@@ -60,12 +60,11 @@ class Bootcamp
 
   def average_grade(student)
     if self.enrolled?(student) && self.num_grades(student) > 0
-    grades = @grades[student]
-    sum = 0
-    grades.each { |grade| sum += grade}
-    return sum / grades.length
+        grades = @grades[student].inject { |acc, el| acc += el }
+        return grades / self.num_grades(student)
+    else
+        return nil
+    end
   end
 
-  nil
-end
 end

@@ -91,7 +91,7 @@ end
 # array_1 = [1, 2, [[3, 4], [5, [6]]], [7, 8]]
 # flatten(array_1)      # => [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 #
-# array_2 = ['this', ['problem', 'is'], [['pretty', 'tough'], [[':)']]]]
+# array_2 = ['this', ['problem', 'is'], [['pretty', 'tough'], [[':)']]], 'this']
 # flatten(array_2)      # => [ 'this', 'problem', 'is', 'pretty', 'tough', ':)' ]
 #
 # flatten('base case')  # => [ 'base case' ]

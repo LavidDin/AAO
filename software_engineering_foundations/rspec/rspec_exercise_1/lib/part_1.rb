@@ -12,7 +12,7 @@ end
 
 def repeat(string, num)
     output = ""
-        num.times { |i| output << string}
+        num.times { output += string}
     return output
 end
 
@@ -21,14 +21,14 @@ def yell(string)
 end
 
 def alternating_case(sentence)
-    words = sentence.split(" ") 
+    words = sentence.split(' ')
 
-    new_words =  words.map.with_index do |word, i|
+    new_words = words.map.with_index do |word, i|
         if i % 2 == 0
-            word.upcase
+            words[i].upcase
         else
-            word.downcase
+            words[i].downcase
         end
     end
-    new_words.join(" ")
+    new_words.join(' ')
 end

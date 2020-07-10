@@ -1,19 +1,13 @@
 def element_count(arr)
-    elements = Hash.new(0)
-    arr.each { |ele| elements[ele] += 1 }
-    return elements
+    count = Hash.new(0)
+    arr.each { |ele| count[ele] += 1}
+    count
 end
 
 def char_replace!(str, hash)
-  (0...str.length).each do |i|
-    if hash.has_key?(str[i])
-      str[i] = hash[str[i]]
-    end
-  end
-
-  str
+    str.each_char.with_index { |char, idx| str[idx] = hash[char] if hash.has_key?(char)}
 end
 
 def product_inject(arr)
-    return arr.inject(1) { |product, n| product * n }
+    arr.inject { |acc, el| acc * el}
 end

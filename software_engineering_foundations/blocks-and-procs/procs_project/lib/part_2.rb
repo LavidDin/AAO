@@ -3,12 +3,10 @@ def reverser(string, &prc)
 end
 
 def word_changer(sentence, &prc)
-    sentence_array = sentence.split(" ")
-    changed = []
-    sentence_array.each do |word|
-        changed << prc.call(word)
-    end
-    changed.join(" ")
+    new_sentence = []
+    words = sentence.split(' ')
+    words.each {|word| new_sentence << prc.call(word)}
+    new_sentence.join(' ')
 end
 
 def greater_proc_value(num, prc_1, prc_2)
@@ -19,26 +17,19 @@ def greater_proc_value(num, prc_1, prc_2)
     greater
 end
 
-def and_selector(array, prc_1, prc_2)
+def and_selector(arr, proc_1, proc_2)
     selected = []
-
-    array.each do |num|
-        if prc_1.call(num) && prc_2.call(num)
-            selected << num
-        end
-    end
+    arr.each { |el| selected << el if proc_1.call(el) && proc_2.call(el) }
     selected
 end
 
-def alternating_mapper(array, prc_1, prc_2)
-    alternated = []
-
-    array.each.with_index do |num, i|
-        if i.even?
-            alternated << prc_1.call(num)
+def alternating_mapper(arr, proc_1, proc_2)
+    mapped = arr.map.with_index do |el, idx|
+        if idx % 2 == 0
+            proc_1.call(el)
         else
-            alternated << prc_2.call(num)
+            proc_2.call(el)
         end
     end
-    alternated
+mapped        
 end

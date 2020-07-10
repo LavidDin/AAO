@@ -7,7 +7,7 @@
 # all_vowel_pairs(["goat", "action", "tear", "impromptu", "tired", "europe"])   # => ["action europe", "tear impromptu"]
 def all_vowel_pairs(words)
     vowels = ['a', 'e', 'i', 'o', 'u']
-    word_pairs
+    word_pairs = []
     words.each.with_index do |word_1, idx_1|
         words.each.with_index do |word_2, idx_2|
             pair = word_1 + ' ' + word_2
@@ -15,7 +15,7 @@ def all_vowel_pairs(words)
         end
     end
 
-    pair
+    word_pairs
 end
 
 # Write a method, composite?, that takes in a number and returns a boolean indicating if the number
@@ -90,7 +90,7 @@ class String
             end
         end
 
-        if length == nil
+        if length.nil?s
             substrings
         else
             substrings.select { |str| str.length == length }

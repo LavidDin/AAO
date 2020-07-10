@@ -31,6 +31,18 @@ end
 
 substrings("jump")
 
+=begin
+def substrings(string)
+    substrings = []
+    (0...string.length).each do |start_idx|
+        (start_idx...string.length).each do |end_idx|
+            string[start_idx..end_idx]
+        end
+    end
+    substrings
+end
+=end
+
 
 def palindrome_substrings(string)
 array = substrings(string)
@@ -43,3 +55,9 @@ palindromes = []
 end
 palindromes
 end
+
+=begin
+def palindrome_substrings(string)
+    substrings(strings).select { |substr| palindrome?(substr) }
+end
+=end

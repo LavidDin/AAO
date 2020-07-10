@@ -55,23 +55,28 @@ end
 #A bi-prime is a positive integer that can be obtained by multiplying two prime numbers.
 
 def bi_prime?(num)
-  prime_factors = []
- (2...num).each do |i|
-    is_prime = true
-    (2...i).each do |factor|
-      if i % factor == 0
-        is_prime = false
-      end
+    prime_factors = []
+
+    (2...num).each do |i|
+        prime_factors << i if prime?(i)
     end
-    prime_factors << i if is_prime == true
-  end
 
     prime_factors.each do |i|
-      prime_factors.each do |j|
-        return true if (i * j) == num
-      end
+        prime_factors.each do |x|
+            return true if i * x == num
+        end
     end
-    return false
+    false
+end
+
+def prime?(num)
+    (2...num).each do |i|
+        if num % i == 0
+            return false
+        else 
+            return true
+        end
+    end
 end
 
 #Write a method vigenere_cipher(message, keys) that accepts a string and a key-sequence as args, returning the encrypted message.
@@ -107,20 +112,19 @@ end
 
 #Class methods
 class String
-  def select(&prc)
-    return '' if prc.nil? 
-    new_str = ''
-    self.each_char do |char|
-      new_str += char if prc.call(char)
-    end
-    new_str
-  end
+    def select(&prc)
+        return '' if prc.nil?
+        new_str = ''
 
-  def map!(&prc)
-    self.each_char.with_index do |char, idx|
-      self(idx) = prc.call(char, idx)
+        self.each_char do |char|
+            new_str += char if prc.call(char)
+        end
+        new_str
     end
-  end
+
+    def map!(&prc)
+        self.each_char.with_index { |char,idx| self[idx] = prc.call(char, idx)}
+    end
 end
 
 #Recursion
@@ -159,10 +163,11 @@ end
 #The array returned should contain numbers in ascending order. Do this recursively.
 
 def prime_factorization(num)
-  (2..num).each do |factor|
+  (2...num).each do |factor|
     if num % factor == 0
       other_fact = num / factor
       return [ *prime_factorization(factor), *prime_factorization(other_fact) ]
     end
+  end
     [num]
 end

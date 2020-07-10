@@ -2,7 +2,7 @@
 def hipsterfy(word)
     vowels = "aeiou"
 
-    i = word.length     - 1
+    i = word.length -1
 
     while i >= 0
         if vowels.include?(word[i])
@@ -32,8 +32,8 @@ end
 
 
 def caesar_cipher(message, num)
-alphabet = ("a".."z").to_a
-new_message = ""
+    alphabet = ("a".."z").to_a
+    new_message = ""
 
     message.each_char do |char|
         if alphabet.include?(char)
@@ -44,6 +44,5 @@ new_message = ""
             new_message += char
         end
     end
-
-new_message
+    new_message
 end

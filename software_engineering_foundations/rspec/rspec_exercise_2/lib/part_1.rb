@@ -14,7 +14,10 @@ end
 end
 
 def merge(hash_1 , hash_2)
-    hash_1.merge(hash_2)
+    new_hash = {}
+    hash_1.each { |k, v| new_hash[k] = v }
+    hash_2.each { |k, v| new_hash[k] = v }
+    new_hash
 end
 
 def censor(sentence, curses)
@@ -47,5 +50,11 @@ end
     
 
 def power_of_two?(num)
-    Math.log2(num) % 1 == 0
+    product = 1
+
+    while product < num
+        product *= 2
+    end
+
+    product == num
 end
