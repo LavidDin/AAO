@@ -5,9 +5,7 @@
 #The method should return a boolean indicating whether or not at least one of the elements of the array returns true when given to the block.
 #Solve this using Array#each.
 def some?(arr, &prc)
-    arr.each do |ele| 
-        return true if prc.call(ele)
-    end
+    arr.each { |el| return true if prc.call(el)}
     false
 end
 
@@ -88,9 +86,7 @@ end
 #Solve this using Array#each.
 def first_index(arr, &prc)
     arr.each.with_index do |ele, idx| 
-        if prc.call(ele)
-            return idx
-        end
+        return idx if prc.call(ele)
     end
     nil
 end
@@ -123,17 +119,10 @@ end
 #If the number argument is not passed in, then the the elements should be run through the block once.
 def multi_map(arr, n = 1, &prc)
     new_arr = arr
-    i = 1
-
-    while i <= n
-        final_arr = []
-        new_arr.each do |ele|
-            final_arr << prc.call(ele)
-        end
-        i += 1
-        new_arr = final_arr
+    n.times do
+        new_arr = new_arr.map {|ele| ele = prc.call(ele)}
     end
-    final_arr
+    new_arr
 end
 
 #proctition
@@ -151,8 +140,7 @@ def proctition(arr, &prc)
             false_arr << ele
         end
     end
-    new_arr = true_arr.concat(false_arr)
-    new_arr
+    true_arr.concat(false_arr)
 end
 
 #Phase 3: Perilous.

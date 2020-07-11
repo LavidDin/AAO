@@ -67,7 +67,7 @@ end
 #Write a method triplet_true? that accepts a string as an argument and returns a boolean indicating whether or not the string contains three of the same character consecutively.
 def triplet_true?(str)
     str.each_char.with_index do |char, idx|
-        return true if char == str[idx+1] && char ==str[idx+2]
+        return true if char == str[idx+1] && char == str[idx+2]
     end
     false
 end

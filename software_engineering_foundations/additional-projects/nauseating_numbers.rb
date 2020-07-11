@@ -111,18 +111,17 @@ end
 #For example, the common divisors of 50 and 30 are 1, 2, 5, 10.
 #You can assume that all of the arguments are positive integers.
 def mutual_factors(*nums)
-    factors = [1]
-    (2..nums.max).each do |i|
-        mutual = []
-        nums.each do |j|
-            if j % i == 0
-               mutual << i
-            end
-        end
-        factors << i if mutual.length == nums.length
-    end
+    factors = []
 
-    factors
+    (1..nums.max).each do |i|
+        mutual = 0
+        nums.each do |num|
+            mutual += 1 if num % i == 0
+        end
+        factors << i if mutual == nums.length
+    end
+    
+factors
 end
 
 #tribonacci_number

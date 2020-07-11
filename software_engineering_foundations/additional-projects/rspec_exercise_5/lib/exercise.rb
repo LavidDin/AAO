@@ -84,3 +84,28 @@ def silly_syllables(sentence)
 
     new_words.join(' ')
 end
+
+=begin
+    
+def silly_syllables(sentence)
+    new_sentence = []
+    vowels = 'aeiou'
+
+    sentence.split(' ').each do |word|
+        vowel_indices = []
+
+        word.each_char.with_index do |char, idx|
+            vowel_indices << idx if vowels.include?(char)
+        end
+
+        if vowel_indices.length < 2
+            new_sentence << word
+        else
+            new_sentence << word[vowel_indices[0]..vowel_indices[-1]]
+        end
+    end
+
+    new_sentence.join(' ')
+end
+
+end
