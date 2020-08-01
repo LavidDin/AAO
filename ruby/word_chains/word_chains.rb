@@ -21,28 +21,28 @@ class WordChainer
     puts adjacent_words
     end
 
-    def run(source, target)
-        @current_words, @all_seen_words = [source], { source => nil }
+  def run(source, target)
+    @current_words, @all_seen_words = [source], { source => nil }
 
-        until @current_words.empty? || @all_seen_words.include?(target)
-            explore_current_words
+    until @current_words.empty? || @all_seen_words.include?(target)
+        explore_current_words
+    end
+
+    build_path(target)
+  end
+
+  def explore_current_words
+    new_current_words = []
+        @current_words.each do |current_word|
+            adjacent_words(current_word).each do |adjacent_word|
+            next if @all_seen_words.key?(adjacent_word)
+
+            new_current_words << adjacent_word
+            @all_seen_words[adjacent_word] = current_word
         end
 
-        build_path(target)
-    end
-
-    def explore_current_words
-        new_current_words = []
-            @current_words.each do |current_word|
-                adjacent_words(current_word).each do |adjacent_word|
-                next if @all_seen_words.key?(adjacent_word)
-
-                new_current_words << adjacent_word
-                @all_seen_words[adjacent_word] = current_word
-            end
-
-        @current_words = new_current_words
-    end
+    @current_words = new_current_words
+  end
 
   def build_path(target)
     path = []
