@@ -1,32 +1,65 @@
 # PHASE 2
 def convert_to_int(str)
-  Integer(str)
+  begin
+    num = Integet(str)
+  rescue ArgumentError
+    puts "Please enter a valid numeric integer"
+  ensure
+    num ||= 0
+  end
+
+  num
 end
 
 # PHASE 3
 FRUITS = ["apple", "banana", "orange"]
 
+class CoffeeError < StandardError
+  def message
+    "I like coffee but I really need a fruit right now. Please try again."
+  end
+end
+
+class NotAFruitError < StandardError
+  def message
+    "That is not a fruit BLURG"
+  end
+end
+
 def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
-    puts "OMG, thanks so much for the #{maybe_fruit}!"
-  else 
-    raise StandardError 
-  end 
+    return "OMG, thanks so much for the #{maybe_fruit}!"
+  elsif maybe_fruit == 'coffee'
+    raise CoffeeError
+  else
+    raise NotAFruitError
+  end
 end
 
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
 
-  puts "Feed me a fruit! (Enter the name of a fruit:)"
-  maybe_fruit = gets.chomp
-  reaction(maybe_fruit) 
-end  
+  begin
+    puts "Feed me a fruit! (Enter the name of a fruit:)"
+    maybe_fruit = gets.chomp
+    reaction(maybe_fruit) 
+  rescue CoffeeError => e
+    puts e.message
+    retry
+  rescue NotAFruitError => e
+    return e.message    
+  end
+end
 
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
+    raise ArgumentError.new("'name' cannot be blank") if name.empty?
+    raise ArgumentError.new("'yrs_known' must be greater than or equal to 5 (best friendships take time)") if yrs_known.to_i < 5
+    raise ArgumentError.new("'fav_pasttime' cannot be blank") if fav_pastime.empty?
+
     @name = name
-    @yrs_known = yrs_known
+    @yrs_known = yrs_known.to_i
     @fav_pastime = fav_pastime
   end
 
@@ -39,8 +72,6 @@ class BestFriend
   end
 
   def give_friendship_bracelet
-    puts "Hey bestie, I made you a friendship bracelet. It says my name, #{@name}, so you never forget me." 
+    puts "Hey bestie, I made you a friendship bracelet. It says my name, #{@name}, so you never forget me."
   end
 end
-
-
