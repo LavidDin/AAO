@@ -1,9 +1,9 @@
 #Write a method no_dupes?(arr) that accepts an array as an arg and returns an new array containing the elements that were not repeated in the array.
 
 def no_dupes?(arr)
-    count = Hash.new(0)
-    arr.each { |ele| count[ele] += 1 }
-    count.keys.select { |v| count[v] == 1 }
+  count = Hash.new(0)
+  arr.each { |ele| count[ele] += 1 }
+  count.keys.select { |v| count[v] == 1 }
 end
 
 
@@ -55,28 +55,28 @@ end
 #A bi-prime is a positive integer that can be obtained by multiplying two prime numbers.
 
 def bi_prime?(num)
-    prime_factors = []
+  prime_factors = []
 
-    (2...num).each do |i|
-        prime_factors << i if prime?(i)
-    end
+  (2...num).each do |i|
+    prime_factors << i if prime?(i)
+  end
 
-    prime_factors.each do |i|
-        prime_factors.each do |x|
-            return true if i * x == num
-        end
+  prime_factors.each do |i|
+    prime_factors.each do |x|
+      return true if i * x == num
     end
-    false
+  end
+  false
 end
 
 def prime?(num)
-    (2...num).each do |i|
-        if num % i == 0
-            return false
-        else 
-            return true
-        end
+  (2...num).each do |i|
+    if num % i == 0
+      return false
+    else 
+      return true
     end
+  end
 end
 
 #Write a method vigenere_cipher(message, keys) that accepts a string and a key-sequence as args, returning the encrypted message.
@@ -87,9 +87,9 @@ def vigenere_cipher(message, keys)
   alphabet = ('a'..'z').to_a
 
   message.each_char.with_index do |char, idx|
-        start_pos = alphabet.index(char)
-        new_pos = start_pos + keys[idx % keys.length]
-        new_str += alphabet[new_pos % alphabet.length]
+      start_pos = alphabet.index(char)
+      new_pos = start_pos + keys[idx % keys.length]
+      new_str += alphabet[new_pos % alphabet.length]
   end
   new_str
 end
@@ -113,17 +113,17 @@ end
 #Class methods
 class String
     def select(&prc)
-        return '' if prc.nil?
-        new_str = ''
+      return '' if prc.nil?
+      new_str = ''
 
-        self.each_char do |char|
-            new_str += char if prc.call(char)
-        end
-        new_str
+      self.each_char do |char|
+        new_str += char if prc.call(char)
+      end
+      new_str
     end
 
     def map!(&prc)
-        self.each_char.with_index { |char,idx| self[idx] = prc.call(char, idx)}
+      self.each_char.with_index { |char,idx| self[idx] = prc.call(char, idx)}
     end
 end
 

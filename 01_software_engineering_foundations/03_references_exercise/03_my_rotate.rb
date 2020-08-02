@@ -11,22 +11,22 @@
 
 
 def my_rotate!(array, amt)
-    x = 0
-    if amt == 0
-        array
-    elsif amt > 0
-        while amt > x do
-            array << array[0]
-            array.shift
-            x += 1
-        end
-    else
-        while amt < x do
-            array.unshift(array[array.length-1])
-            array.pop
-            x -= 1
-        end
+  x = 0
+  if amt == 0
+    array
+  elsif amt > 0
+    while amt > x do
+      array << array[0]
+      array.shift
+      x += 1
     end
+  else
+    while amt < x do
+      array.unshift(array[array.length-1])
+      array.pop
+      x -= 1
+    end
+  end
 array
 end
 

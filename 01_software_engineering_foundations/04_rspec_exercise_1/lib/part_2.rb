@@ -1,32 +1,32 @@
 
 def hipsterfy(word)
-    vowels = "aeiou"
+  vowels = "aeiou"
 
-    i = word.length -1
+  i = word.length -1
 
-    while i >= 0
-        if vowels.include?(word[i])
-            return word[0...i] + word[i+1..-1]
-        end
-
-        i -= 1
+  while i >= 0
+    if vowels.include?(word[i])
+      return word[0...i] + word[i+1..-1]
     end
+
+    i -= 1
+  end
 
 word
 end
 
 
 def vowel_counts(string)
-    counts = Hash.new(0)
-    vowels = "aeiou"
+  counts = Hash.new(0)
+  vowels = "aeiou"
 
-    string.downcase.each_char do |char|
-        if vowels.include?(char)
-            counts[char] += 1
-        end
+  string.downcase.each_char do |char|
+    if vowels.include?(char)
+      counts[char] += 1
     end
+  end
 
-    counts
+  counts
 end
 
 

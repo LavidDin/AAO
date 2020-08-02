@@ -1,13 +1,13 @@
 class ComputerPlayer
-    attr_reader :mark
+  attr_reader :mark
 
-    def initialize(val)
-        @mark = val
-    end
+  def initialize(val)
+    @mark = val
+  end
 
-    def get_position(legal_positions)
-        choice = legal_positions.sample
-        puts "Computer #{self.mark} chose position #{choice.to_s}"
-        choice
-    end
+  def get_position(legal_positions)
+    choice = legal_positions.sample
+    puts "Computer #{self.mark} chose position #{choice.to_s}"
+    choice
+  end
 end

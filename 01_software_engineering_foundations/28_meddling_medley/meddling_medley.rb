@@ -4,7 +4,7 @@
 def duos(str)
   count = 0
   str.each_char.with_index do |char, idx|
-      count += 1 if char == str[idx+1]
+    count += 1 if char == str[idx+1]
   end
   count
 end

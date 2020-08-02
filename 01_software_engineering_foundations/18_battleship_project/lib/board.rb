@@ -29,12 +29,12 @@ class Board
 
   def attack(position)
     if self[position] == :S
-        self[position] = :H
-        p 'you sunk my battleship!'
-        return true
+      self[position] = :H
+      p 'you sunk my battleship!'
+      return true
     else
-        self[position] = :X
-        return false
+      self[position] = :X
+      return false
     end
   end
 
