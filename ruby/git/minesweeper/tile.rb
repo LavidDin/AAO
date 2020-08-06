@@ -1,5 +1,5 @@
 class Tile
-  attr_accessor :mine #:revealed :adjacent_mines_count
+  attr_accessor :mine, :revealed, :adjacent_mines_count
 
   def initialize
       @mine = false
@@ -16,18 +16,16 @@ class Tile
   def status
     if @mine == true
       status = 'B'
-    elsif @revealed == false && @flagged == true
-      status = 'F'
+    #elsif @revealed == false && @flagged == true
+    #  status = 'F'
     elsif @revealed == false
       status = '*'
-    elsif @flagged == true
-      status = 'F'
-    elsif @revealed == true
-      status = '_'
-    end
-
-    if @revealed == true && @adjacent_mines_count > 0
+    #elsif @flagged == true
+    #  status = 'F'
+    elsif @revealed == true && @adjacent_mines_count > 0
       status = adjacent_mines_count
+    elsif @revealed == true
+      status = '-'
     end
 
     status

@@ -71,16 +71,28 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
     else
       @grid[row][col].revealed = true
     end
-=begin
-  if adjacent_mines_count == 0
-    CELL_MOVES.each do |move|
-      @grid[row+move[0]][col+move[1]].status = revealed
+
+    if @grid[row][col].adjacent_mines_count == 0
+      CELL_MOVES.each do |move|
+        @grid[row+move[0]][col+move[1]].revealed = true
+        #@grid[row+move[0]][col+move[1]].status
+      end
     end
-  end
-=end
 
   end
 
+  def reveal_adjacent(row, col)
+    if @grid[row][col].adjacent_mines_count == 0
+      CELL_MOVES.each do |move|
+        move_row = row + move[0]
+        move_col = col +move[1]
+        @grid[move_row][move_col].revealed = true
+        self.reveal_adjacent(move_row,move_col)
+      end
+    end
+
+  end
+  
   def place_mines
     while num_mines < 9 do
     row = rand(8)
