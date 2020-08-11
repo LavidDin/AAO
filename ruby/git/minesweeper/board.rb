@@ -1,7 +1,7 @@
 require './tile'
 
 class Board
-CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1]]
+NEIGHBOUR_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1]]
   
   #section to print the grid using the status of each tile
   def print_grid(arr)
@@ -28,7 +28,6 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
   attr_accessor :grid
 
   def initialize
-    @mines = []
     @grid = Array.new(9) { Array.new(9) { Tile.new } }
     place_mines
   end
@@ -43,8 +42,8 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
     @grid[row][col].status = val
   end
 
+  #counts the number of mines on the grid
   def num_mines
-    count = 0
     @grid.flatten.count { |ele| ele.mine == true }
   end
 
@@ -52,7 +51,7 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
     row, col = position
     adjacent_mines_count = 0
 
-    CELL_MOVES.each do |move|
+    NEIGHBOUR_MOVES.each do |move|
       if @grid[row+move[0]][col+move[1]].mine == true
         adjacent_mines_count += 1
       end
@@ -66,33 +65,35 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
     row, col = position
 
     if @grid[row][col].mine == true
-      puts 'You hit a bomb. That means you lose!'
       false
     else
       @grid[row][col].revealed = true
     end
 
     if @grid[row][col].adjacent_mines_count == 0
-      CELL_MOVES.each do |move|
+      NEIGHBOUR_MOVES.each do |move|
+        NEIGHBOUR_MOVES.each do |move|
         @grid[row+move[0]][col+move[1]].revealed = true
         #@grid[row+move[0]][col+move[1]].status
+        end
       end
     end
-
+    self.print
   end
 
   def reveal_adjacent(row, col)
-    if @grid[row][col].adjacent_mines_count == 0
-      CELL_MOVES.each do |move|
-        move_row = row + move[0]
-        move_col = col +move[1]
+    NEIGHBOUR_MOVES.each do |move|
+      move_row = row + move[0]
+      move_col = col +move[1]
+      if adjacent_mines_count(move_row, move_col) > 0
         @grid[move_row][move_col].revealed = true
-        self.reveal_adjacent(move_row,move_col)
       end
+      self.reveal_adjacent(move_row,move_col)
     end
 
   end
-  
+
+  #Places mines on the board
   def place_mines
     while num_mines < 9 do
     row = rand(8)
@@ -104,6 +105,9 @@ CELL_MOVES = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1,1
     end
   end
 
+  def won?
+    @grid.flatten.all? { |tile| tile.mine != tile.revealed }
+  end
 
 
   def cheat

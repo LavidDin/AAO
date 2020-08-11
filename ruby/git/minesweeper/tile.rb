@@ -23,7 +23,7 @@ class Tile
     #elsif @flagged == true
     #  status = 'F'
     elsif @revealed == true && @adjacent_mines_count > 0
-      status = adjacent_mines_count
+      status = @adjacent_mines_count
     elsif @revealed == true
       status = '-'
     end
