@@ -66,7 +66,8 @@ def scandinavia
       name, population
     FROM
       countries
-    WHERE name IN ('Denmark', 'Finland', 'Norway', 'Sweden')
+    WHERE 
+      name IN ('Denmark', 'Finland', 'Norway', 'Sweden')
   SQL
 end
 
