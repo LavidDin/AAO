@@ -167,35 +167,17 @@ end
 
 #pascals_triangle
 #Write a method pascals_triangle that accepts a positive number, n, as an argument and returns a 2-dimensional array representing the first n levels of pascal's triangle.
+
 def pascals_triangle(n)
-  #return nil if n < 0
-  triangle = [1]
-  return triangle if n == 1
-  return triangle << [1, 1] if n ==2
-
-  x = 1
-  while x <= n
-    triangle << new_line(x)
-    x += 1
-  end
-  return triangle
-end
-
-def new_line(n)
-  i = 0
-  j = i+1
-  new = []
-  iterate = n - 2
-
-  iterate.times do
-    previous_line = pascals_traingle(n-1)
-    new << (previous_line[i] + previous_line[j])
-    i +=1
-  end
-
-  new.shift[1]
-  new.push[1]
-  return new
+    triangle = [[1]]
+    while triangle.length < n
+        level_above = triangle.last
+        next_level = [1]
+        next_level += adjacent_sums(level_above)
+        next_level << 1
+        triangle << next_level
+    end
+    triangle
 end
 
 #Phase 4: Nauseating.
