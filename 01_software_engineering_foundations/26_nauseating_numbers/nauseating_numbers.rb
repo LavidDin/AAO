@@ -168,6 +168,14 @@ end
 #pascals_triangle
 #Write a method pascals_triangle that accepts a positive number, n, as an argument and returns a 2-dimensional array representing the first n levels of pascal's triangle.
 
+def adjacent_sums(arr)
+    sums = []
+    (0...arr.length-1).each do |i|
+        sums << arr[i] + arr[i + 1]
+    end
+    sums
+end
+
 def pascals_triangle(n)
     triangle = [[1]]
     while triangle.length < n
